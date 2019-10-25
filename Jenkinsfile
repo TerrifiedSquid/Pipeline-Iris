@@ -1,5 +1,7 @@
 // This is a Jenkinsfile, when Jenkins is used, it searches a repository and executes files of this name
 
+//The Step below clears the pipeline of potential leftovers of previous runs.
+// Technically not needed but nice to ensure errors don’t crop up in the future. 
 try {
   stage('checkout') {
     node {
@@ -8,19 +10,18 @@ try {
    }
   }
 
-
-  // Run terraform init 
+  // This sections runs terraform init 
   stage('init') {
       node {
+        // The Credentials binding plugin allows for the Vault token to be associated with the Vault’s address 
        withCredentials([[
-      
-  
       $class: 'VaultTokenCredentialBinding', 
-   credentialsId: 'vault-github-access-token', 
+   credentialsId: 'YOUR_VAULT_TOKEN', 
    vaultAddr: 'http://VAULT_SERVER']]) 
          {    ansiColor('xterm') {
   
-        // values will be masked
+        // The Following checks the Vault for a the desired responce, the address and the token
+        // These values will be cencored and will display as *********
         sh 'echo TOKEN=$VAULT_TOKEN'
         sh 'echo ADDR=$VAULT_ADDR'
            sh 'terraform init' 
@@ -30,16 +31,14 @@ try {
        }                   
       }
 
- 
-
   // Run terraform plan
   stage('plan ') {
     node {
        withCredentials([[
       
      $class: 'VaultTokenCredentialBinding', 
-        // This token is the name of the GitHub Token you stored on Jenkins 
-   credentialsId: 'vault-github-access-token', 
+        // This token is the name of the Token you stored on Jenkins 
+   credentialsId: 'YOUR_VAULT_TOKEN', 
         // This is the name of the vault server that you launced  
    vaultAddr: 'http://VAULT_SERVER']]) 
          {    ansiColor('xterm') {
@@ -67,10 +66,9 @@ stage('apply') {
         [path: 'kv-v1/new', engineVersion: 1, secretValues: [
             [envVar: 'vaultsecret', vaultKey: 'githubtoken']]]]
 
-    // optional configuration, if you do not provide this the next higher configuration
-    // (e.g. folder or global) will be used
-    def configuration = [vaultUrl: 'http://51a3ab4b.ngrok.io',
-                         vaultCredentialId: '403token',
+      // optional configuration, changing the engineVersion to 2]
+        def configuration = [vaultUrl: 'http://VAULT_SERVER',
+                         vaultCredentialId: 'YOUR_VAULT_TOKEN',
                          engineVersion: 1]
     // inside this block your credentials will be available as env variables
     withVault([configuration: configuration, vaultSecrets: secrets]) {
@@ -94,8 +92,8 @@ stage('apply') {
        withCredentials([[
       
       $class: 'VaultTokenCredentialBinding', 
-   credentialsId: 'vault-github-access-token', 
-   vaultAddr: 'http://51a3ab4b.ngrok.io']]) 
+   credentialsId: 'YOUR_VAULT_TOKEN', 
+   vaultAddr: 'http://VAULT_SERVER']]) 
          {    ansiColor('xterm') {
   
         // values will be masked
@@ -107,10 +105,7 @@ stage('apply') {
         }
        }                   
       }
-      
-    
-    
-    
+     
     
   currentBuild.result = 'SUCCESS'
 }

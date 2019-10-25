@@ -7,7 +7,7 @@ variable "notcount" {
   default     = "TerrifiedSquid"
 }
 
-# The following variable is meant to point back to Github 
+# The following variable is a placeholder for the Vault crednetials provided. 
 variable "TOKEN" {
   description = "Token for Access"
 }

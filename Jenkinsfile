@@ -1,3 +1,5 @@
+// This is a Jenkinsfile, when Jenkins is used, it searches a repository and executes files of this name
+
 try {
   stage('checkout') {
     node {

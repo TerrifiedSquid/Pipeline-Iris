@@ -12,3 +12,4 @@ The Jenkins server is launched (1) and stores GitHub and a Multibranch Pipeline 
 In order to execute the commands it finds, the pipeline will have to provide GitHub with Valid Credentials. These can unfortunatly not be those stored directly in Jenkins and used for the webhook, a way of doing this is still being explored. 
 The pipeline uses stored Vault Credentials (5) to fetch GitHub credentials (6) which are then used to apply the desired changes to GitHub (6). In our case we have included a series of Terraform instructions that will be executed.   
  
+![JenkinsFlow](./images/jenkinsflow.jpg)

@@ -112,7 +112,7 @@ stage('apply') {
         }
        }                   
       }
-     
+     }
     
   currentBuild.result = 'SUCCESS'
 }
@@ -128,4 +128,4 @@ finally {
     currentBuild.result = 'SUCCESS'
   }
 }
-}
+

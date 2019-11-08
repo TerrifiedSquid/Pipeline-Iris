@@ -17,7 +17,7 @@ try {
        withCredentials([[
       $class: 'VaultTokenCredentialBinding', 
    credentialsId: 'vaulttoken', 
-   vaultAddr: 'http://terraform.treehouses.io:8082/']]) 
+   vaultAddr: 'http://127.0.0.1:8200']]) 
          {    ansiColor('xterm') {
   
         // The Following checks the Vault for a the desired responce, the address and the token
@@ -40,7 +40,7 @@ try {
         // This token is the name of the Token you stored on Jenkins 
    credentialsId: 'vaulttoken', 
         // This is the name of the vault server that you launced  
-   vaultAddr: 'http://terraform.treehouses.io:8082/']]) 
+ vaultAddr: 'http://127.0.0.1:8200']]) 
          {    ansiColor('xterm') {
   
         // values will be masked

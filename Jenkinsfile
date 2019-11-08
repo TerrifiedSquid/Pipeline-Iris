@@ -2,6 +2,13 @@
 
 //The Step below clears the pipeline of potential leftovers of previous runs.
 // Technically not needed but nice to ensure errors don’t crop up in the future. 
+pipeline{
+   agent {
+    docker {
+      image 'hashicorp/terraform:light'
+      args '--entrypoint='
+    }
+   }
 try {
   stage('checkout') {
     node {
@@ -120,4 +127,5 @@ finally {
   if (currentBuild.result == 'SUCCESS') {
     currentBuild.result = 'SUCCESS'
   }
+}
 }

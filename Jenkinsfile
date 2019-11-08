@@ -16,7 +16,7 @@ try {
         // The Credentials binding plugin allows for the Vault token to be associated with the Vault’s address 
        withCredentials([[
       $class: 'VaultTokenCredentialBinding', 
-   credentialsId: 'vaulttoken', 
+   credentialsId: 'tokenforvault', 
    vaultAddr: 'http://127.0.0.1:8200']]) 
          {    ansiColor('xterm') {
   
@@ -38,7 +38,7 @@ try {
       
      $class: 'VaultTokenCredentialBinding', 
         // This token is the name of the Token you stored on Jenkins 
-   credentialsId: 'vaulttoken', 
+   credentialsId: 'tokenforvault', 
         // This is the name of the vault server that you launced  
  vaultAddr: 'http://127.0.0.1:8200']]) 
          {    ansiColor('xterm') {
@@ -67,8 +67,8 @@ stage('apply') {
             [envVar: 'vaultsecret', vaultKey: 'githubtoken']]]]
 
       // optional configuration, changing the engineVersion to 2]
-        def configuration = [vaultUrl: 'http://terraform.treehouses.io:8082/',
-                         vaultCredentialId: 'vaulttoken',
+        def configuration = [vaultUrl: 'http://127.0.0.1:8200',
+                         vaultCredentialId: 'tokenforvault',
                          engineVersion: 1]
     // inside this block your credentials will be available as env variables
     withVault([configuration: configuration, vaultSecrets: secrets]) {
@@ -93,7 +93,7 @@ stage('apply') {
       
       $class: 'VaultTokenCredentialBinding', 
    credentialsId: 'vaulttoken', 
-   vaultAddr: 'http://terraform.treehouses.io:8082/']]) 
+   vaultAddr: 'http://127.0.0.1:8200']]) 
          {    ansiColor('xterm') {
   
         // values will be masked

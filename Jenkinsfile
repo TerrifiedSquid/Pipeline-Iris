@@ -2,13 +2,9 @@
 
 //The Step below clears the pipeline of potential leftovers of previous runs.
 // Technically not needed but nice to ensure errors don’t crop up in the future. 
-
-   agent {
-    docker {
-      image 'hashicorp/terraform:light'
-      args '--entrypoint='
-    }
-   }
+provider "docker" {
+  host = "tcp://172.17.0.1/"
+}
 try {
   stage('checkout') {
     node {

@@ -4,8 +4,8 @@
   } 
 
 # Example terraform command
- resource "github_membership" "ArranTest" {
- username = "ArranTest"
+ resource "github_membership" "dogi" {
+ username = "dogi"
  role = "member" 
  }
 

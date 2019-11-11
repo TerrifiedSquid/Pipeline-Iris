@@ -4,7 +4,7 @@ variable "notcount" {
 
   variable "github_organization" {
   description = "Organization Name"
-  default     = "TerrifiedSquid"
+  default     = "CrackingKraken"
 }
 
 # The following variable is a placeholder for the Vault crednetials provided. 

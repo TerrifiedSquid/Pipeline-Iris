@@ -64,7 +64,7 @@ stage('apply') {
     node {
    
     def secrets = [
-        [path: 'kv-v1/new', engineVersion: 1, secretValues: [
+        [path: 'kv-v1/github/treehouses', engineVersion: 1, secretValues: [
             [envVar: 'vaultsecret', vaultKey: 'githubtoken']]]]
 
       // optional configuration, changing the engineVersion to 2]

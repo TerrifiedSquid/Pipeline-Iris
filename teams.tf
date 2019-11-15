@@ -9,8 +9,4 @@
  role = "member" 
  }
 
- resource "github_membership" "ArranHL" {
- username = "ArranHL"
- role = "member" 
- }
 

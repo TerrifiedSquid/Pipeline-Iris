@@ -9,5 +9,8 @@
  role = "member" 
  }
 
-
+ resource "github_membership" "FlashTeamTango" {
+ username = "FlashTeamTango"
+ role = "member" 
+ }
 
